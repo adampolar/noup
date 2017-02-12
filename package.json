@@ -1,0 +1,21 @@
+{
+  "name": "noup",
+  "version": "1.0.0",
+  "description": "a piece of software that places websocket clients in groups of four",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --debug-brk"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "immutable": "^3.8.1",
+    "node-uuid": "^1.4.7",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
