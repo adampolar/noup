@@ -4,7 +4,7 @@
   "description": "a piece of software that places websocket clients in groups of four",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --debug-brk"
+    "test": "mocha test"
   },
   "author": "",
   "license": "ISC",
