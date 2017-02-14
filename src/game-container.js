@@ -18,7 +18,7 @@ module.exports = function (messagePlayer, app){
                 app.gameState = app.roomManager.createRoom(app.gameState);
             }
             room = app.roomManager.getFirstAvailableRoom(app.gameState);
-            app.gameState = app.roomManager.addPlayerToRoom(app.gameState, room, playerId);
+            app.gameState = app.roomManager.addPlayerToRoom(app.gameState, room, app.playerManager.createPlayer(playerId));
             room = app.roomManager.getLatestRoom(app.gameState, room);
             if(app.roomManager.isRoomReady(app.gameState, room)) {
                 app.coupManager.beginCoup( 

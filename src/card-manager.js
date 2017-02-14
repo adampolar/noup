@@ -71,7 +71,7 @@ var cardTypes = {
 }
 
 function createDeck() {
-    return immutable.List.of(
+    return immutable.fromJS( [
         cardTypes.AMBASSADOR,
         cardTypes.AMBASSADOR,
         cardTypes.AMBASSADOR,
@@ -86,7 +86,8 @@ function createDeck() {
         cardTypes.CONTESSA,
         cardTypes.DUKE,
         cardTypes.DUKE,
-        cardTypes.DUKE)
+        cardTypes.DUKE
+    ])
 }
 
 function shuffleDeck(deck) {
@@ -97,4 +98,28 @@ function getShuffledDeck() {
     return shuffleDeck(createDeck());
 }
 
-module.exports.getShuffledDeck = getShuffledDeck;
+function prepDeckAndDeal(room) {
+    let deck = getShuffledDeck();
+    let noOfPlayers = room.get('players').size;
+    let lastManCards = room.getIn(['players',  noOfPlayers - 1, 'cards']);
+    let lastManCardCount = lastManCards? lastManCards.size : 0;
+    let i = 0;
+    while(lastManCardCount !== 2) {
+
+        let cards = room.getIn(['players', i % noOfPlayers, 'cards']);
+        let topCard = deck.first();
+        deck = deck.shift();
+        cards = cards? cards.push(topCard) : immutable.fromJS([topCard]);
+
+        room = room.setIn(['players', i % noOfPlayers, 'cards'], cards);
+
+        i++;
+        lastManCards = room.getIn(['players', noOfPlayers - 1, 'cards']);
+        lastManCardCount = lastManCards? lastManCards.size : 0;
+    }
+
+    return room;
+}
+
+
+module.exports.prepDeckAndDeal = prepDeckAndDeal;
