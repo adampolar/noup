@@ -9,6 +9,10 @@ module.exports = function (cardManager) {
         return room;
     }
 
+    function assignStartingPlayer(room) {
+        return room.set('turn', room.getIn(['players', Math.floor(Math.random() * 4) + 1, 'id']));
+    }
+
     return {
         giveStarterCoins: giveStarterCoins,
 
@@ -19,10 +23,14 @@ module.exports = function (cardManager) {
             room = room.set('inProgress', true);
             room = cardManager.prepDeckAndDeal(room);
             room = giveStarterCoins(room);
+            room = assignStartingPlayer(room);
 
             room.get('players').forEach((player) => {
                 messagePlayer(player.get('id'))(player.getIn(['cards',0,'name']) + player.getIn(['cards',1,'name']));
             });
+
+            messagePlayer(room.get('turn'))("take turn");
+            return room;
         }
     };
 }

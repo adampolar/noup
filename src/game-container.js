@@ -24,7 +24,7 @@ module.exports = function (messagePlayer, app) {
                 room = app.coupManager.beginCoup(
                     room,
                     messagePlayer);
-                gameState = app.roomManager.setRoomByName(gameState, room);
+                app.gameState = app.roomManager.setRoomByName(app.gameState, room);
             }
 
         }
