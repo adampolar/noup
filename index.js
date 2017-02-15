@@ -17,15 +17,19 @@ io.on('connection', function(socket){
   socket.on('game message', function(msg){
     gameContainer.messageFromPlayer(socket.id, JSON.parse(msg));
   });
+  socket.on('disconnect', function() {
+    gameContainer.playerDropped(socket.id);
+  })
 });
 
-function messagePlayer(playerId) {
-  if(io.sockets.connected[playerId]) {
+
+function messagePlayer(socketId) {
+  if(io.sockets.connected[socketId]) {
     return function (message) {
-      io.to(playerId).emit('game message', message);
+      io.to(socketId).emit('game message', message);
     }
   } else {
-    gameContainer.playerDropped(playerId);
+    gameContainer.playerDropped(socketId);
   }
 }
 
