@@ -64,4 +64,12 @@ describe('roomManager', function () {
         expect(immutable.is(gameState.get(room2Arr[0]), room)).to.be.true
     });
 
+    it('getRoomByPlayerId should get the room by the playerId', function() {
+        let gameState = f.createGameStateTest4();
+        expect(immutable.is(
+            rm.getRoomByPlayerId(gameState, "getRoomByPlayerIdTestPlayer"),
+            gameState.find((r) => r.get('name') === "getRoomByPlayerIdTestRoom")))
+            .to.be.true;
+    })
+
 });

@@ -172,6 +172,79 @@ module.exports = function () {
                 ]
             );
         },
+        createGameStateTest4: function () {
+            return immutable.fromJS(
+                [
+                    {
+                        name: 0,
+                        players: [
+                            {
+                                id: 0
+                            },
+                            {
+                                id: 1
+                            },
+                            {
+                                id: 2
+                            },
+                            {
+                                id: 3
+                            }
+                        ]
+                    },
+                    {
+                        name: 1,
+                        players: [
+                            {
+                                id: 0
+                            },
+                            {
+                                id: 1
+                            }
+                        ]
+                    },
+                    {
+                        name: "getRoomByPlayerIdTestRoom",
+                        players: [
+                            {
+                                id: 0
+                            },
+                            {
+                                id: "getRoomByPlayerIdTestPlayer"
+                            }
+                        ]
+                    },
+                    {
+                        name: 3,
+                        players: [
+                            {
+                                id: 0
+                            },
+                            {
+                                id: 1
+                            },
+                            {
+                                id: 2
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        name: 5,
+                        players: [
+                            {
+                                id: 0
+                            },
+                            {
+                                id: 1
+                            },
+                            {
+                                id: 2
+                            }
+                        ]
+                    }
+                ]);
+        },
         createTestPlayer: function (id) {
             return immutable.fromJS({
                 id: id

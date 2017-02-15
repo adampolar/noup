@@ -40,9 +40,18 @@ function setRoomByName(gameState, room) {
     return gameState.set(roomToUpdate[0], room);
 }
 
+function getRoomByPlayerId(gameState, playerId) {
+    return gameState.find((r) => {
+        return !!r.get('players').find((p) => {
+            return p.get('id') === playerId
+        });
+    });
+}
+
 module.exports.getLatestRoom = getLatestRoom;
 module.exports.isRoomReady = isRoomReady;
 module.exports.addPlayerToRoom = addPlayerToRoom;
 module.exports.getFirstAvailableRoom = getFirstAvailableRoom;
 module.exports.createRoom = createRoom;
 module.exports.setRoomByName = setRoomByName;
+module.exports.getRoomByPlayerId = getRoomByPlayerId;
