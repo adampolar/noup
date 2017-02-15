@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const f = require('./fixtures')();
-
+const immutable = require('immutable');
 
 var rm = require('../src/room-manager')
 
@@ -53,6 +53,15 @@ describe('roomManager', function () {
         //add player to room two
         gameState = rm.addPlayerToRoom(gameState, room2, testPlayer);
         expect(rm.getLatestRoom(gameState, room2).get('players').includes(testPlayer)).to.be.true
+    });
+
+    it('setRoomByName should update the room to match the given room', function () {
+        let gameState = f.createGameStateTest1();
+        let room = f.createTestRoom();
+        let room2Arr = gameState.findEntry((r) => { return r.get('name') === 2 });
+        room = room.set('name', room2Arr[1].get('name'));
+        gameState = rm.setRoomByName(gameState, room);
+        expect(immutable.is(gameState.get(room2Arr[0]), room)).to.be.true
     });
 
 });

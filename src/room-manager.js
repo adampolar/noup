@@ -35,8 +35,14 @@ function getLatestRoom(gameState, room) {
     return gameState.findEntry((r) => { return r.get('name') === room.get('name') })[1];
 }
 
+function setRoomByName(gameState, room) {
+    let roomToUpdate = gameState.findEntry((r) => r.get('name') === room.get('name'));
+    return gameState.set(roomToUpdate[0], room);
+}
+
 module.exports.getLatestRoom = getLatestRoom;
 module.exports.isRoomReady = isRoomReady;
 module.exports.addPlayerToRoom = addPlayerToRoom;
 module.exports.getFirstAvailableRoom = getFirstAvailableRoom;
 module.exports.createRoom = createRoom;
+module.exports.setRoomByName = setRoomByName;

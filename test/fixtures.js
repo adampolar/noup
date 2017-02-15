@@ -193,7 +193,8 @@ module.exports = function () {
                     {
                         id: 3
                     }
-                ]
+                ],
+                randomMember: 1234
             })
         }
     }
