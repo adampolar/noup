@@ -15,7 +15,7 @@ http.listen(3000, function(){
 io.on('connection', function(socket){
   gameContainer.playerArrived(socket.id);
   socket.on('game message', function(msg){
-    gameContainer.messageFromPlayer(socket.id, msg);
+    gameContainer.messageFromPlayer(socket.id, JSON.parse(msg));
   });
 });
 
