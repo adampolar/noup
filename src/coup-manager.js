@@ -16,21 +16,25 @@ module.exports = function (cardManager) {
     return {
         giveStarterCoins: giveStarterCoins,
 
-        beginCoup: function (room, messagePlayer) {
-            room.get('players').forEach((player) => {
-                messagePlayer(player.get('id'))("GAME BEGUN: " + room.get('name'));
-            });
+        beginCoup: function (room, messenger) {
+
+            messenger.messageAllInRoom(room, (p) => "GAME BEGUN: " + room.get('name'));
+
             room = room.set('inProgress', true);
             room = cardManager.prepDeckAndDeal(room);
             room = giveStarterCoins(room);
             room = assignStartingPlayer(room);
 
-            room.get('players').forEach((player) => {
-                messagePlayer(player.get('id'))(player.getIn(['cards',0,'name']) + player.getIn(['cards',1,'name']));
-            });
+            messenger.messageAllInRoom(room, 
+            (p) => p.getIn(['cards',0,'name']) + p.getIn(['cards',1,'name'])
+            );
 
-            messagePlayer(room.get('turn'))("take turn");
+            messenger.messageTurnPlayer(room, "take turn");
             return room;
+        },
+
+        turn: function(gameState, playerId, message) {
+            cardManager.getMove()
         }
     };
 }
