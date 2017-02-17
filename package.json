@@ -4,7 +4,8 @@
   "description": "a piece of software that places websocket clients in groups of four",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "nyc mocha test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "coveralls": "^2.11.16",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2"
   }
 }
