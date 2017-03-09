@@ -14,6 +14,13 @@ module.exports = function (roomManager) {
             },
             messageTurnPlayer: function (room, message) {
                 messagePlayer(room.get('turn'))(message);
+            },
+            messageEveryoneInRoomButCurrentPlayer: function (room, message) {
+                room.get('players').forEach((player) => {
+                    if (player !== player.get('id')) {
+                        messagePlayer(player.get('id'))(message);
+                    }
+                });
             }
         }
 

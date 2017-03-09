@@ -48,6 +48,20 @@ function getRoomByPlayerId(gameState, playerId) {
     });
 }
 
+function getCurrentTurn(gameState, playerId) {
+    return gameState.find((r) => room.get('turn') === playerId);    
+}
+
+function isStillInGame(gameState, playerId) {
+    return true; //TODO
+}
+
+function setMoveInProgress(gameState, playerId) {
+    let room = getRoomByPlayerId(gameState, playerId);
+    room.set('turn', playerId);
+    return setRoomByName(gameState, room);
+}
+
 module.exports.getLatestRoom = getLatestRoom;
 module.exports.isRoomReady = isRoomReady;
 module.exports.addPlayerToRoom = addPlayerToRoom;
@@ -55,3 +69,4 @@ module.exports.getFirstAvailableRoom = getFirstAvailableRoom;
 module.exports.createRoom = createRoom;
 module.exports.setRoomByName = setRoomByName;
 module.exports.getRoomByPlayerId = getRoomByPlayerId;
+module.exports.getCurrentTurn = getCurrentTurn;

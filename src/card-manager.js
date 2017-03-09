@@ -9,6 +9,82 @@ function makeCard(name, positiveAction, negativeAction) {
     }
 }
 
+const STANDARD_MOVES = {
+    INCOME: {
+        effectOnPlayingPlayer: {
+            coins: 1,
+            switchCards: false
+        },
+        effectOnOppositePlayer: null,
+        canBeBlockedBy: null,
+        necessaryCards: null,
+    },
+    FOREIGN_AID: {
+        effectOnPlayingPlayer: {
+            coins: 2,
+            switchCards: false
+        },
+        effectOnOppositePlayer: null,
+        canBeBlockedBy: "DUKE",
+        necessaryCards: null
+    },
+    COUP: {
+        effectOnPlayingPlayer: {
+            coins: -7,
+            switchCards: false
+        },
+        effectOnOppositePlayer: {
+            coins: 0,
+            cards: -1
+        },
+        canBeBlockedBy: null,
+        necessaryCards: null
+    },
+    TAX: {
+        effectOnPlayingPlayer: {
+            coins: 3,
+            switchCards: false
+        },
+        effectOnOppositePlayer: null,
+        canBeBlockedBy: null,
+        necessaryCards: "DUKE"
+    },
+    ASSASSINATE: {
+        effectOnPlayingPlayer: {
+            coins: -3,
+            switchCards: false
+        },
+        effectOnOppositePlayer: {
+            coins: 0,
+            cards: -1
+        },
+        canBeBlockedBy: ["CONTESSA"],
+        necessaryCards: "ASSASSIN"
+    },
+    STEAL: {
+        effectOnPlayingPlayer: {
+            coins: 2,
+            switchCards: false
+        },
+        effectOnOppositePlayer: {
+            coins: -2,
+            cards: 0
+        },
+        canBeBlockedBy: ["CAPTAIN", "AMBASSADOR"],
+        necessaryCards: "CAPTAIN"    
+    },
+    SWITCH_CARDS: {
+        effectOnPlayingPlayer: {
+            coins: 0,
+            switchCards: true
+        },
+        effectOnOppositePlayer: null,
+        canBeBlockedBy: [],
+        necessaryCards: "AMBASSADOR"  
+    }
+}
+
+
 var cardTypes = {
     AMBASSADOR: {
         name: "ambassador",
@@ -96,6 +172,10 @@ function shuffleDeck(deck) {
 
 function getShuffledDeck() {
     return shuffleDeck(createDeck());
+}
+
+function getMove(move){
+    return STANDARD_MOVES[move];
 }
 
 function prepDeckAndDeal(room) {
