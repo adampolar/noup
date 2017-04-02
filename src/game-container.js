@@ -84,6 +84,13 @@ module.exports = function (messagePlayer, app) {
             room = app.roomManager.getFirstAvailableRoom(app.gameState);
             app.gameState = app.roomManager.addPlayerToRoom(app.gameState, room, app.playerManager.createPlayer(playerId));
             room = app.roomManager.getLatestRoom(app.gameState, room);
+            
+            messenger.messageAllInRoom(room, 'lobby message', () => {
+                let playerList = [];
+                room.get('players').forEach((player) => playerList.push(player.get('id')));
+                return JSON.stringify(playerList);
+            })
+
             if (app.roomManager.isRoomReady(app.gameState, room)) {
 
                 room = app.coupManager.beginCoup(room, messenger);

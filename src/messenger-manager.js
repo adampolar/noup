@@ -7,9 +7,9 @@ module.exports = function (roomManager) {
                 messagePlayer(playerId)(message);
             },
 
-            messageAllInRoom: function (room, messageMaker) {
+            messageAllInRoom: function (room, type, messageMaker) {
                 room.get('players').forEach((player) => {
-                    messagePlayer(player.get('id'))(messageMaker(player));
+                    messagePlayer(player.get('id'))(type, messageMaker(player));
                 });
             },
             messageTurnPlayer: function (room, message) {
